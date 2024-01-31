@@ -12,7 +12,7 @@ permissions:
   pages: write
   id-token: write
 
-concurency:
+concurrency:
   group: "pages"
   cancel-in-progress: false
 
