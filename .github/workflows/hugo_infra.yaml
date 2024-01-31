@@ -56,7 +56,7 @@ jobs:
   deploy:
     environment:
       name: Production
-      url: ${{ steps.pages.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
