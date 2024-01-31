@@ -1,0 +1,10 @@
+baseURL: "https://moonblogs.com/"
+languageCode: "en-us"
+title: "Moon Blogs"
+theme: "papermod"
+
+menu:
+  main:
+    - identifier: "tags"
+      name: "Tags"
+      url: "/tags/"
