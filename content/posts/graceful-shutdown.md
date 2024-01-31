@@ -23,7 +23,7 @@ When I thought about processes getting terminated I immediately think of `CTRL +
 
 Here's a high level image of what's going on when sending `CTRL + C` to a terminal window that has a server running on `localhost:3000` (pardon me if I missed any key layers).
 
-![High Level Overview of App Term](/termination_journey.jpeg)
+![High Level Overview of App Term](/images/termination_journey.jpeg)
 
 The above is for a simple locally hosted web-app. In a production-grade containerized application deployed on multiple EC2 instances and lives across multiple Kubernetes pods, there are new concerns that arise related to the management of the application, scaling, updates, or system events. Kubernetes pods can [terminate](https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-terminating-with-grace) for various reasons such as:
 
@@ -44,7 +44,7 @@ Kubernetes terminates a pod in 3 phases:
 
 Here's a high level overview of the application termination process:
 
-![High Level k8s Termination](/k8s_grace_period.jpeg)
+![High Level k8s Termination](images/k8s_grace_period.jpeg)
 
 K8s has a control plane which can be thought of as the brain that manages the resources at a cluster level. The termination signals initiate here. Zooming in a bit more, K8's also has the concept of a Kubelet. Continuing with the brain analogy, the Kubelet can be thought of as the peripheral nerves that carry out commands of the control plane at the Node level.
 
