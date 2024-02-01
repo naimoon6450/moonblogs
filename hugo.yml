@@ -1,4 +1,4 @@
-baseURL:
+baseURL: "https://moonslog.com"
 languageCode: "en-us"
 title: "Moon Blogs"
 theme: "papermod"
