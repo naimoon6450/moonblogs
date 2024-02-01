@@ -44,7 +44,7 @@ Kubernetes terminates a pod in 3 phases:
 
 Here's a high level overview of the application termination process:
 
-![High Level k8s Termination](images/k8s_grace_period.jpeg)
+![High Level k8s Termination](/images/k8s_grace_period.jpeg)
 
 K8s has a control plane which can be thought of as the brain that manages the resources at a cluster level. The termination signals initiate here. Zooming in a bit more, K8's also has the concept of a Kubelet. Continuing with the brain analogy, the Kubelet can be thought of as the peripheral nerves that carry out commands of the control plane at the Node level.
 
