@@ -11,3 +11,4 @@ menu:
 
 params:
   description: "Blog about technology, programming, productivity, philosophy, and life."
+  hideFooter: true
