@@ -18,7 +18,7 @@ params:
   profileMode:
     enabled: true
     title: "Welcome to Moon Blogs! \U0001F44B"
-    subtitle: "I'm a Senior Software Engineer @ Teachable. I hope to write about technology, programming, productivity, philosophy, and life to bring clarity in my understanding \U0001F9E0"
+    subtitle: "My name is Naimun Siraj and I'm a Senior Software Engineer @ Teachable. I hope to write about technology, programming, productivity, and general musings to bring clarity in my understanding of various topics \U0001F9E0"
     imageUrl: "/images/profile_vfinal.jpg"
     imageWidth: "200px"
     imageHeight: "200px"
