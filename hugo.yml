@@ -1,6 +1,6 @@
 baseURL: "https://moonywrites.com/"
 languageCode: "en-us"
-title: "Moon Blogs"
+title: "Moon Bytes"
 theme: "papermod"
 
 menu:
@@ -17,8 +17,8 @@ menu:
 params:
   profileMode:
     enabled: true
-    title: "Welcome to Moon Blogs! \U0001F44B"
-    subtitle: "My name is Naimun Siraj and I'm a Senior Software Engineer @ Teachable. I hope to write about technology, programming, productivity, and general musings to bring clarity in my understanding of various topics \U0001F9E0"
+    title: "Welcome to Moon Bytes! \U0001F44B"
+    subtitle: "Naimun Siraj is a Senior Software Engineer @ Teachable. He enjoys writing about technology, programming, productivity, and general musings to bring clarity to his understanding of various topics \U0001F9E0"
     imageUrl: "/images/profile_vfinal.jpg"
     imageWidth: "200px"
     imageHeight: "200px"
