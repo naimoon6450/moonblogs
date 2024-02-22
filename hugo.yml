@@ -5,18 +5,48 @@ theme: "papermod"
 
 menu:
   main:
+    - identifier: "posts"
+      name: "Posts"
+      url: "/posts/"
+      weight: 1
     - identifier: "tags"
       name: "Tags"
       url: "/tags/"
+      weight: 2
 
 params:
+  profileMode:
+    enabled: true
+    title: "Welcome to Moon Blogs! \U0001F44B"
+    subtitle: "I'm a Senior Software Engineer @ Teachable. I hope to write about technology, programming, productivity, philosophy, and life to bring clarity in my understanding \U0001F9E0"
+    imageUrl: "/images/profile_vfinal.jpg"
+    imageWidth: "200px"
+    imageHeight: "200px"
+
   description: "Thoughts about technology, programming, productivity, philosophy, and life."
   hideFooter: true
   comments: true
   author: "Naimun Siraj"
   enableOpenGraph: true
+  showReadingTime: true
+  showShareButtons: true
+  showCodeCopyButtons: true
+  customCSS: ["/css/custom.css"]
+
+  # homeInfoParams:
+  #   title: "Improving my knowledge one post at a time"
+
+  socialIcons:
+    - name: "github"
+      url: "https://github.com/naimoon6450"
+    - name: "linkedin"
+      url: "https://www.linkedin.com/in/nsiraj"
 
 sitemap:
   filename: sitemap.xml
+
+social:
+  github:
+  linkedin: "moonywrites"
 
 enableRobotsTXT: true
