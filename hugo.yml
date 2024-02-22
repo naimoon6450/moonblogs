@@ -10,5 +10,13 @@ menu:
       url: "/tags/"
 
 params:
-  description: "Blog about technology, programming, productivity, philosophy, and life."
+  description: "Thoughts about technology, programming, productivity, philosophy, and life."
   hideFooter: true
+  comments: true
+  author: "Naimun Siraj"
+  enableOpenGraph: true
+
+sitemap:
+  filename: sitemap.xml
+
+enableRobotsTXT: true

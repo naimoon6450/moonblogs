@@ -3,6 +3,7 @@ title = 'Importance of Graceful Shutdown'
 date = 2024-01-31T15:00:22-05:00
 draft = false
 tags = ["kubernetes", "microservices", "graceful shutdown"]
+summary = "Understanding the importance of graceful shutdown in a distributed system"
 +++
 
 It's been almost one year since I built my first Microservice and one thing that I've been meaning to write about is the necessity for an application to handle graceful shutdown. 
