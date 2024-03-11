@@ -1,6 +1,6 @@
 baseURL: "https://moonywrites.com/"
 languageCode: "en-us"
-title: "Moon Bytes"
+title: "Moony Writes"
 theme: "papermod"
 
 menu:
@@ -17,30 +17,32 @@ menu:
 params:
   profileMode:
     enabled: true
-    title: "Welcome to Moon Bytes! \U0001F44B"
-    subtitle: "Naimun Siraj is a Senior Software Engineer @ Teachable. He enjoys writing about technology, programming, productivity, and general musings to bring clarity to his understanding of various topics \U0001F9E0"
-    imageUrl: "/images/profile_vfinal.jpg"
-    imageWidth: "200px"
-    imageHeight: "200px"
+    title: "Musings from the Moon! \U0001F315"
+    subtitle: "Trying to get into this writing thing 📝 before AI 🤖 takes over..."
+    buttons:
+      - name: "About"
+        url: "/about/"
+      - name: Posts
+        url: "/posts/"
+      - name: Tags
+        url: "/tags/"
 
   description: "Thoughts about technology, programming, productivity, philosophy, and life."
   hideFooter: true
   comments: true
-  author: "Naimun Siraj"
   enableOpenGraph: true
   showReadingTime: true
   showShareButtons: true
   showCodeCopyButtons: true
   customCSS: ["/css/custom.css"]
 
-  # homeInfoParams:
-  #   title: "Improving my knowledge one post at a time"
-
   socialIcons:
     - name: "github"
       url: "https://github.com/naimoon6450"
     - name: "linkedin"
       url: "https://www.linkedin.com/in/nsiraj"
+    - name: "medium"
+      url: "https://medium.com/@naimoon6450"
 
 sitemap:
   filename: sitemap.xml

@@ -4,6 +4,7 @@ date = 2024-02-21T21:19:47-05:00
 draft = false
 tags = ["problem solving"]
 summary = "A middle dive into a problem that wasn't what it seemed"
+author = "Naimun Siraj"
 +++
 
 ## **Overview**
