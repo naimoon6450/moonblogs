@@ -1,0 +1,12 @@
+<ul>
+	{{ $posts := where .Site.Pages "Type" "post" }}
+	{{ $publishedPosts := where $posts "Draft" "!=" true }}
+	{{ $sortedPosts := sort $publishedPosts "Date" "desc" }}
+	{{ range first 3 $sortedPosts }}
+	<li>
+		<a href="{{ .RelPermalink }}">{{ .Title }}</a> - {{ .Date.Format "2006-01-02" }}
+	</li>
+	{{ end }}
+</ul>
+
+<a href="/posts">View all posts!</a>

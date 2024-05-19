@@ -5,6 +5,7 @@ draft = false
 tags = ["problem solving"]
 summary = "A middle dive into a problem that wasn't what it seemed"
 author = "Naimun Siraj"
+type = "post"
 +++
 
 ## **Overview**

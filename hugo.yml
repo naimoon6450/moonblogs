@@ -15,17 +15,12 @@ menu:
       weight: 2
 
 params:
-  profileMode:
-    enabled: true
-    title: "Musings from the Moon! \U0001F315"
-    subtitle: "Trying to get into this writing thing 📝 before AI 🤖 takes over..."
-    buttons:
-      - name: "About"
-        url: "/about/"
-      - name: Posts
-        url: "/posts/"
-      - name: Tags
-        url: "/tags/"
+  homeInfoParams:
+    title: Naimun Siraj
+
+  mainSections:
+    - posts
+    - tags
 
   description: "Thoughts about technology, programming, productivity, philosophy, and life."
   hideFooter: true
@@ -34,7 +29,7 @@ params:
   showReadingTime: true
   showShareButtons: true
   showCodeCopyButtons: true
-  customCSS: ["/css/custom.css"]
+  customCSS: ["css/common/custom.css"]
 
   socialIcons:
     - name: "github"

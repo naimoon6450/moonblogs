@@ -5,6 +5,7 @@ draft = false
 tags = ["kubernetes", "microservices", "graceful shutdown"]
 summary = "Understanding the importance of graceful shutdown in a distributed system"
 author = "Naimun Siraj"
+type = "post"
 +++
 
 It's been almost one year since I built my first Microservice and one thing that I've been meaning to write about is the necessity for an application to handle graceful shutdown. 

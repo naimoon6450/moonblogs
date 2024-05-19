@@ -4,6 +4,7 @@ date = 2024-02-22T17:38:31-05:00
 draft = true
 tags = ["education", "growth mindset"]
 author = "Naimun Siraj"
+type = "post"
 +++
 
 The One World School House by Sal Khan is an incredible analysis of the state of our education system in the United States. Sal recounts how Khan Academy came to be, its mission, and how it can potentially transform the world. Moreover, he discusses why our current education system is failing us due to archaic and arbitrary decisions made by the people in power at the time.
