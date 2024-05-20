@@ -13,7 +13,7 @@ type = "post"
 
 Our infra engineer noticed that an asynchronous worker server for one of our services was crashing with an out of memory (OOM) error. This service was responsible for queuing and processing background jobs. 
 
-Upon examining the datadog logs, there wasn't anything particularly alarming—just a "signal: killed" message. The temporary fix was to allocate more memory to the worker server, but this was a waste of resources and didn't address the root cause.
+Upon examining the datadog logs, there wasn't anything particularly alarming—just a "signal: killed" message. The memory consumption of the pod would steadily increase and then crash when it reached its threshold. The temporary fix was to allocate more memory to the worker server, but this was a waste of resources and didn't address the root cause.
 
 ## Investigation
 
