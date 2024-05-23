@@ -3,14 +3,14 @@
 ---
 
 Prior to Teachable, I was a: 
-- Forward Deployed Engineer @ Bluecore
-- Cloud Migration Consultant / Software Engineer @ Accenture
+- Forward Deployed Engineer @ **[Bluecore](https://www.bluecore.com/)**
+- Cloud Migration Consultant / Software Engineer @ **[Accenture](https://www.accenture.com/us-en)**
 
 I have a **B.S. in Chemical Engineering** from Columbia University (SEAS).
 
-In my free time, I like to go bouldering, read, learn, and write!
+In my free time, I like to go bouldering 🧗‍♂️, read 📖, learn about tech 🤓, and write ✍🏽.
 
-Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/nsiraj/).
+Feel free to connect with me on **[LinkedIn](https://www.linkedin.com/in/nsiraj/)**.
 
 ---
 
