@@ -25,10 +25,29 @@ There are a few pre-requisite items to be familiar with that would solidify one'
 
 Encoding is a **reversible** process of converting data from one form to another, typically to make it easier to transport. In our use case, we needed to encode some metadata -- namely, the header, payload, and signature -- to safely ferry it from our client to our server over HTTPS.
 
+```
+header = {
+	"alg": "RS256",
+	"typ": "JWT"
+}
+
+payload = {
+  "sub": "1234567890",
+  "name": "John Doe",
+  "admin": true,
+  "iat": 1516239022
+}
+
+base64urlEncoding(header) + '.' + base64urlEncoding(payload) = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0
+```
+
 If we don't encode the data we want to send, there could be data corruption/loss due to misinterpretation of byte values as the the data travels over the wire.
 
 Without Base64 encoding, trying to send binary data to another system would be like trying to speak in a language that the listener may not understand. They might catch a few words, miss others entirely, or misconstrue the entire message. Base64 encoding ensures our data is heard correctly, without any mishaps along the way.
 
+
 ### Hashing
 
 Hashing is an **irreversible** process (or one-way function) of taking an input of any length and produce a fixed-length hash value. The length is determined by the SHA algorithm used. We use a SHA-256 algorithm that produces a 256-bit (32-byte) hash value.
+
+Compared to encoding, hashing will actually protect
