@@ -1,5 +1,5 @@
 +++
-title = 'Attempting to Understand JWT (JSON Web Tokens)'
+title = 'Demystifying JWT: Understanding JSON Web Tokens for Secure Authorization'
 date = 2024-05-15T14:57:40-04:00
 draft = false
 type = "post"
@@ -10,7 +10,7 @@ tags = ["microservices", "authorization", "security"]
 
 While working on our checkout service, I noticed that we used JWTs to _authorize_ client side requests. Authorization as opposed to Authentication because these requests are made between services and the client is already authenticated (logged into the platform). A co-worker asked a question about how JWT works and that got me spiraling down the rabbit hole.
 
-My initial understanding was that there JWT's were used to tell the backend server that the request being made was made by a trusted party (ie. logged in user). Traditionally, a user is identified via cookies and sessions, but that is a stateful solution where the session data gets stored in the server and adds additional complexity.
+I knew JWTs were used to tell the backend server that the request being made was made by a trusted party (ie. logged in user), but the mechanism was still a mystery to me. In contrast to JWT, traditional user session-based authorization uses cookies and sessions, but that is a stateful solution. Stateful because the session data is managed in the server and adds additional complexity.
 
 In our architecture, I understood that the backend generates a token using a private key stored in AWS Key Management Service, which is then verified in our checkout service, but the underlying process was still nebulous. Specifically, it was unclear to me how the public key was used to determine that the token was coming from the right place.
 
@@ -113,4 +113,4 @@ Here are some notes I drew out for my own understanding:
 
 ![JWT Sketch](/images/jwt_sketch.jpeg)
 
-JWTs are a powerful _stateless_ alternative to user based sessioning and a powerful tool when it comes to client to service authorization. Its built on top of a few abstractions, so peeling each layer open allows one to have a better understanding of the overall structure and security.
+JWTs are a powerful _stateless_ alternative to user based sessioning and a powerful tool when it comes to client to service authorization. Its built on top of a few abstractions, so peeling each layer allows one to have a better understanding of the overall structure and security.
