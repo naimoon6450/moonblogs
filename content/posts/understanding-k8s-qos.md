@@ -89,7 +89,7 @@ Here you can see the container with a hard limit on its volume. The pods will us
 
 ## The Incident
 
-During our incident, our student-app pods were crashing due to reaching cpu limits. We had HPA in place, but it failed to scale up due to the metric we were using.
+During the incident, our student-app pods were crashing due to reaching cpu limits. We had HPA in place, but it failed to scale up due to the metric we were using.
 
 Our HPA uses cpuAverageUtilization and memoryAverageUtilization to decide if we should scale the pods up, but this calculation was skewed, preventing the HPA from adding more pods.
 
