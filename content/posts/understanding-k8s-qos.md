@@ -9,7 +9,7 @@ author = "Naimun Siraj"
 
 ## Overview
 
-My recent on-call shift was quite the rollercoaster, but I came out of it with many learnings (as usual). One particularly interesting incident was resolved by updating our __Quality of Service__ configuration for the impacted deployment to __Burstable__.
+My recent on-call shift was quite the rollercoaster, but yielded valuable insights as usual. One particularly interesting incident was resolved by modifying our __Quality of Service__ configuration for the impacted application pods to __Burstable__.
 
 What does that mean? Well that's what I'm hoping to address in this writeup as well as better grok it myself.
 
@@ -22,25 +22,25 @@ Our backend is divided into various K8s deployments, each with its own allocated
 - And so on...
 
 
-Kind of like this:
+Here's a simplified schematic of the backend:
 
 ![K8s Ingress](/images/k8s_ingress.jpeg)
 
-This layout allows us to scale our application components independently based on load. If our student app experiences high traffic, more pods can come to the rescue (see [horizontal pod autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)) and handle the additional demand.
+This modular design enables us to scale individual application components independently based on demand. For instance, if our student-facing application experiences a surge in traffic, additional pods can be dynamically provisioned (see [horizontal pod autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)) to manage the increased load.
 
 ### A Brief Look at HPA
 
-Horizontal Pod Autoscaling (HPA) enables your application to react to various types of traffic load. You can configure a minimum and maximum number of pods that your application can scale up or down to, depending on the load.
+Horizontal Pod Autoscaling (HPA) enables your application to adapt to various types of traffic load. You can configure a minimum and maximum number of replicas, within which your application can scale to in response to varying traffic load.
 
-How does it decide when to scale up or down? That's the job of the [kube-control-manager](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/). 
+The decision of scaling direction is managed by the [kube-control-manager](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/). 
 
-The control manager uses metrics that are defined in your configuration to decide if the application needs more/less pods. In our students application, we defined the average cpu/memory usage of the pods, which the control manager will use to make the decision.
+The control manager uses metrics that are defined in your configuration to decide how the application should scale (add or remove pods).
 
-However, sometimes adding more pods isn't enough. Applications may be CPU or Memory bound and reaching those limits would cause pods to crash, regardless of how many are added. That's where [Quality of Service](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/) comes into play.
+However, sometimes adding more pods isn't enough. Applications may be CPU or Memory bound and reaching these limits could result in pod crashing, regardless of the total pod count. This is where [Quality of Service](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/) comes into play.
 
 ## Quality of Service (QoS)
 
-QoS is a way K8s prioritizes which pods to evict when the node is under resource pressure (note that the pods live inside a [Node](https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/)). In addition, the QoS is also used to "beef-up" the pods as necessary before the eviction occurs.
+QoS is a way K8s is a mechanism for prioritizing pod eviction when a node experiences resource pressure (note that the pods 'live' inside a [Node](https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/)). Additionally, the QoS is used to "beef-up" the pods as necessary before eviction.
 
 There are 3 types of QoS, listed in order:
 - Best Effort
@@ -75,11 +75,11 @@ Example of "Burstable" workflows include batch job processing and web app server
 
 Here you can see the container with a "burst request / limit" portrayed by the valve. You can configure the resources request limits using this valve, which would allow more "volume to be taken up by the water". Or in the case of the pods, more cpu/memory to be used.
 
-Note that if you have requests defined without limits, the pods can burst up to use all of the node level resources. If you define limits, the pods will use those numbers instead.
+Note that if you have requests defined without limits, the pods can burst up to use all of the node level resources. If you define limits, the pods will adhere to these specified thresholds.
 
 ### Guaranteed
 
-Pods are classified as [_Guaranteed_](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#burstable) if there are **_defined cpu/memory requests/limits_**. These pods can  use NO MORE than the resources defined in the deployment file.
+Pods are classified as [_Guaranteed_](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#burstable) if there are **_defined cpu/memory requests/limits_**. These pods can use NO MORE than the resources defined in the deployment file.
 
 This QoS class defines a strict and consistent experience ideal for critical workloads. For example, a High Frequency Trading (HFT) platform may need workflows that are Guaranteed to ensure minimal latency and consistent operations even under peak load. If it was "Burstable" or "Best Effort" in nature, that would lead to inconsistent performance, higher latency, and higher risk.
 
@@ -99,11 +99,11 @@ To resolve the issue, we updated the deployment config to have a Burstable QoS b
 
 ## Conclusion
 
-It's absolutely fascinating that we have such fine-grained control over the "adaptability" of our application. There are definitely some gaps in my understanding here, but hoping I can plug them shut as I continue engaging with K8s.
+It's absolutely fascinating that we have can have such fine-grained control over the "adaptability" of our applications. There are definitely some gaps in my understanding here, but I'm hoping to plug them shut as I continue engaging with K8s.
 
 P.S. During my descent into the QoS/HPA rabbit hole, I found this fantastic chart from Natan Yellin in this [reddit thread](https://www.reddit.com/r/kubernetes/comments/wgztqh/for_the_love_of_god_stop_using_cpu_limits_on/) that sums up the state of your pod based on the defined requests/limits.
 
-P.S.S. The analogies are ROUGH. I really wanted to box K8s concepts into fluid mechanics somehow and the result was the above haha.
+P.S.S. The analogies are ROUGH. I wanted to box K8s concepts into fluid mechanics somehow and the result was the above haha.
 
 ![Natan CPUMem Chart](/images/natan_chart.jpeg)
 [_source_](https://home.robusta.dev/blog/stop-using-cpu-limits?nocache=234#data-fancybox-2)
