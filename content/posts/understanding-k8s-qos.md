@@ -103,7 +103,7 @@ It's absolutely fascinating that we have can have such fine-grained control over
 
 P.S. During my descent into the QoS/HPA rabbit hole, I found this fantastic chart from Natan Yellin in this [reddit thread](https://www.reddit.com/r/kubernetes/comments/wgztqh/for_the_love_of_god_stop_using_cpu_limits_on/) that sums up the state of your pod based on the defined requests/limits.
 
-P.S.S. The analogies are ROUGH. I wanted to box K8s concepts into fluid mechanics somehow and the result was the above haha.
-
 ![Natan CPUMem Chart](/images/natan_chart.jpeg)
 [_source_](https://home.robusta.dev/blog/stop-using-cpu-limits?nocache=234#data-fancybox-2)
+
+P.S.S. The analogies are ROUGH. I wanted to box K8s concepts into fluid mechanics somehow and the result was the above haha.
