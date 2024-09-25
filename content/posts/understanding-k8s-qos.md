@@ -1,5 +1,5 @@
 +++
-title = 'Understanding K8s QoS'
+title = 'Understanding K8s Quality of Service (QoS)'
 date = 2024-09-16T08:43:51-04:00
 draft = false
 type = "post"
