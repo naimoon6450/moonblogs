@@ -9,7 +9,7 @@ author = "Naimun Siraj"
 
 ## Overview
 
-My recent on-call shift was quite the rollercoaster, but I came out of it many learnings (as usual). One particularly interesting incident was resolved by updating our __Quality of Service__ configuration for the impacted deployment to __Burstable__.
+My recent on-call shift was quite the rollercoaster, but I came out of it with many learnings (as usual). One particularly interesting incident was resolved by updating our __Quality of Service__ configuration for the impacted deployment to __Burstable__.
 
 What does that mean? Well that's what I'm hoping to address in this writeup as well as better grok it myself.
 
