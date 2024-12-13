@@ -1,8 +1,9 @@
-**Senior Software Engineer @ [Teachable](https://teachable.com/)** based in Brooklyn, New York.
+**Senior Software Engineer I @ [HubSpot](https://hubspot.com/)** based in New York.
 
 ---
 
-Prior to Teachable, I was a: 
+Prior to HubSpot, I was a:
+- Senior Software Engineer @ **[Teachable](https://www.teachable.com/)**
 - Forward Deployed Engineer @ **[Bluecore](https://www.bluecore.com/)**
 - Cloud Migration Consultant / Software Engineer @ **[Accenture](https://www.accenture.com/us-en)**
 
@@ -16,4 +17,4 @@ Feel free to connect with me on **[LinkedIn](https://www.linkedin.com/in/nsiraj/
 
 ## **Recent Posts**
 
-{{< recentPosts >}}
+{{< recentPosts >}}/
