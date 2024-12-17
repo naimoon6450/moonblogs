@@ -12,7 +12,12 @@ menu:
     - identifier: "tags"
       name: "Tags"
       url: "/tags/"
+      weight: 3
+    - identifier: "tils"
+      name: "Tils"
+      url: "/tils/"
       weight: 2
+
 
 params:
   homeInfoParams:
@@ -20,6 +25,7 @@ params:
 
   mainSections:
     - posts
+    - tils
     - tags
 
   description: "Thoughts about technology, programming, productivity, philosophy, and life."
