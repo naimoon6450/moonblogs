@@ -2,6 +2,7 @@
 title = 'Not Trying Too Hard'
 date = 2024-06-09T12:58:57-04:00
 draft = true
+type = "thought"
 +++
 
 Why is it that when you focus on something too hard you get worse at the thing vs when you are calm and don't care too much?

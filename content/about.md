@@ -17,4 +17,4 @@ Feel free to connect with me on **[LinkedIn](https://www.linkedin.com/in/nsiraj/
 
 ## **Recent Posts**
 
-{{< recentPosts >}}/
+{{< recentPosts >}}

@@ -1,5 +1,5 @@
 <ul>
-	{{ $posts := where .Site.Pages "Type" "post" }}
+	{{ $posts := where .Site.Pages "Type" "==" "post" }}
 	{{ $publishedPosts := where $posts "Draft" "!=" true }}
 	{{ $sortedPosts := sort $publishedPosts "Date" "desc" }}
 	{{ range first 3 $sortedPosts }}
