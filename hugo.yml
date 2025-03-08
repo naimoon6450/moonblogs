@@ -44,6 +44,8 @@ params:
     - name: "medium"
       url: "https://medium.com/@naimoon6450"
 
+  goatcounter: "moonywrites"
+
 sitemap:
   filename: sitemap.xml
 
