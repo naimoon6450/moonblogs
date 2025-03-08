@@ -1,20 +1,18 @@
-<!-- GoatCounter Analytics with No-JS Fallback -->
-{{ if hugo.IsProduction }}
-  {{ with site.Params.goatcounter }}
-  <script data-goatcounter="https://{{ . }}.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
-  <noscript>
-    <img src="https://{{ . }}.goatcounter.com/count?p={{ .RelPermalink }}">
-  </noscript>
-  {{ end }}
+<!-- GoatCounter Analytics -->
+{{ if site.Params.goatcounter }}
+<script data-goatcounter="https://{{ site.Params.goatcounter }}.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<noscript>
+  <img src="https://{{ site.Params.goatcounter }}.goatcounter.com/count?p={{ .Page.RelPermalink }}">
+</noscript>
 {{ end }}
 
 <!-- Example of tracking a custom event -->
-<script>
+<!-- <script>
 document.getElementById('my-button').addEventListener('click', function() {
   window.goatcounter.count({
     path: 'my-button-click',
     event: true
   });
 });
-</script> 
+</script>  -->
