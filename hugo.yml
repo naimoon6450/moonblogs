@@ -17,9 +17,9 @@ menu:
       name: "TIL"
       url: "/til/"
       weight: 2
-    - identifier: "goals"
-      name: "Goals"
-      url: "/goals/"
+    - identifier: "intentions"
+      name: "Intentions"
+      url: "/intentions/"
       weight: 4
 
 
