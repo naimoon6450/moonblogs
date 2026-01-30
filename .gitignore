@@ -4,3 +4,7 @@
 node_modules
 dist
 tmp
+
+telegram-bot/.env
+telegram-bot/
+habit
