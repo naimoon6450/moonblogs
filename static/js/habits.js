@@ -7,6 +7,7 @@
 
   function getWeeksInYear(year) {
     const weeks = [];
+    year = parseInt(year, 10);
     const startDate = new Date(year, 0, 1);
     const endDate = new Date(year, 11, 31);
 
