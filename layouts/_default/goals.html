@@ -1,0 +1,72 @@
+{{- define "main" }}
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+  </header>
+
+  <div class="post-content">
+    <link rel="stylesheet" href="/css/habits.css">
+
+    <div class="habits-container">
+      <div class="year-selector">
+        {{- $years := slice }}
+        {{- range $year, $data := .Site.Data.habits }}
+          {{- $years = $years | append $year }}
+        {{- end }}
+        {{- $years = sort $years }}
+        {{- range $years }}
+        <button class="year-btn" data-year="{{ . }}">{{ . }}</button>
+        {{- end }}
+      </div>
+
+      <section class="habit-section" id="rollup-section">
+        <h2>Rollup</h2>
+        <p class="habit-subtitle">5 habits tracked</p>
+        <div class="contribution-graph" id="rollup-graph"></div>
+      </section>
+
+      <section class="habit-section">
+        <h2>Meditation</h2>
+        <div class="contribution-graph" id="meditation-graph"></div>
+      </section>
+
+      <section class="habit-section">
+        <h2>Journaling</h2>
+        <div class="contribution-graph" id="journaling-graph"></div>
+      </section>
+
+      <section class="habit-section">
+        <h2>Writing</h2>
+        <div class="contribution-graph" id="writing-graph"></div>
+      </section>
+
+      <section class="habit-section">
+        <h2>Exercise</h2>
+        <div class="contribution-graph" id="exercise-graph"></div>
+      </section>
+
+      <section class="habit-section">
+        <h2>Reading</h2>
+        <div class="contribution-graph" id="reading-graph"></div>
+      </section>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+      const habitsData = {
+        {{- range $year, $data := .Site.Data.habits }}
+        "{{ $year }}": {
+          meditation: [{{ range $i, $d := $data.meditation }}{{ if $i }},{{ end }}"{{ $d }}"{{ end }}],
+          journaling: [{{ range $i, $d := $data.journaling }}{{ if $i }},{{ end }}"{{ $d }}"{{ end }}],
+          writing: [{{ range $i, $d := $data.writing }}{{ if $i }},{{ end }}"{{ $d }}"{{ end }}],
+          exercise: [{{ range $i, $d := $data.exercise }}{{ if $i }},{{ end }}"{{ $d }}"{{ end }}],
+          reading: [{{ range $i, $d := $data.reading }}{{ if $i }},{{ end }}"{{ $d }}"{{ end }}]
+        },
+        {{- end }}
+      };
+    </script>
+    <script src="/js/habits.js"></script>
+  </div>
+</article>
+{{- end }}

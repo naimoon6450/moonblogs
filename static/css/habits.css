@@ -1,0 +1,179 @@
+.habits-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.year-selector {
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.year-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: var(--tertiary);
+  color: var(--primary);
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.year-btn:hover {
+  background: var(--secondary);
+}
+
+.year-btn.active {
+  background: var(--primary);
+  color: var(--theme);
+  font-weight: bold;
+}
+
+.habit-section {
+  margin-bottom: 2.5rem;
+}
+
+.habit-section h2 {
+  margin-bottom: 0.25rem;
+  font-size: 1.1rem;
+}
+
+.habit-subtitle {
+  color: var(--secondary);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.contribution-graph {
+  overflow-x: auto;
+}
+
+.graph-wrapper {
+  display: inline-block;
+  min-width: 750px;
+}
+
+.month-labels {
+  display: flex;
+  font-size: 0.7rem;
+  color: var(--secondary);
+  margin-bottom: 0.25rem;
+  padding-left: 20px;
+}
+
+.month-label {
+  flex: 1;
+  text-align: left;
+}
+
+.graph-body {
+  display: flex;
+}
+
+.day-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 0.65rem;
+  color: var(--secondary);
+  padding-right: 4px;
+  width: 16px;
+}
+
+.day-label {
+  height: 11px;
+  line-height: 11px;
+}
+
+.weeks-container {
+  display: flex;
+  gap: 2px;
+}
+
+.week-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.day-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: var(--border);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.day-cell:hover {
+  transform: scale(1.2);
+}
+
+.day-cell.level-0 {
+  background: var(--border);
+}
+
+.day-cell.level-1 {
+  background: #9be9a8;
+}
+
+.day-cell.level-2 {
+  background: #40c463;
+}
+
+.day-cell.level-3 {
+  background: #30a14e;
+}
+
+.day-cell.level-4 {
+  background: #216e39;
+}
+
+.day-cell.future {
+  background: var(--border);
+  opacity: 0.3;
+}
+
+.day-cell.today {
+  outline: 2px solid var(--primary);
+  outline-offset: -1px;
+}
+
+.tooltip {
+  position: fixed;
+  background: var(--primary);
+  color: var(--theme);
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+.tooltip.visible {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .graph-wrapper {
+    min-width: 600px;
+  }
+
+  .day-cell {
+    width: 9px;
+    height: 9px;
+  }
+
+  .day-labels {
+    width: 14px;
+  }
+
+  .day-label {
+    height: 9px;
+    line-height: 9px;
+  }
+}
