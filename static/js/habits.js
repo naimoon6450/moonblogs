@@ -92,20 +92,17 @@
     monthLabels.className = 'month-labels';
 
     let currentMonth = -1;
-    let weekCount = 0;
     weeks.forEach((week, weekIndex) => {
       week.forEach(day => {
         if (day && day.getMonth() !== currentMonth) {
           const label = document.createElement('span');
           label.className = 'month-label';
           label.textContent = MONTHS[day.getMonth()];
-          label.style.marginLeft = `${weekCount * 13}px`;
+          label.style.left = `${weekIndex * 13}px`;
           monthLabels.appendChild(label);
           currentMonth = day.getMonth();
-          weekCount = 0;
         }
       });
-      weekCount++;
     });
 
     wrapper.appendChild(monthLabels);
@@ -194,20 +191,17 @@
     monthLabels.className = 'month-labels';
 
     let currentMonth = -1;
-    let weekCount = 0;
-    weeks.forEach((week) => {
+    weeks.forEach((week, weekIndex) => {
       week.forEach(day => {
         if (day && day.getMonth() !== currentMonth) {
           const label = document.createElement('span');
           label.className = 'month-label';
           label.textContent = MONTHS[day.getMonth()];
-          label.style.marginLeft = `${weekCount * 13}px`;
+          label.style.left = `${weekIndex * 13}px`;
           monthLabels.appendChild(label);
           currentMonth = day.getMonth();
-          weekCount = 0;
         }
       });
-      weekCount++;
     });
 
     wrapper.appendChild(monthLabels);

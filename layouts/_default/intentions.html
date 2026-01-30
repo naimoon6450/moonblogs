@@ -19,9 +19,16 @@
         {{- end }}
       </div>
 
+      {{- $habitCount := 0 -}}
+      {{- range $year, $data := .Site.Data.habits -}}
+        {{- range $habit, $dates := $data -}}
+          {{- $habitCount = add $habitCount 1 -}}
+        {{- end -}}
+        {{- break -}}
+      {{- end -}}
       <section class="habit-section" id="rollup-section">
-        <h2>Rollup</h2>
-        <p class="habit-subtitle">5 habits tracked</p>
+        <h2>All Habits</h2>
+        <p class="habit-subtitle">Combined activity across {{ $habitCount }} habits</p>
         <div class="contribution-graph" id="rollup-graph"></div>
       </section>
 
