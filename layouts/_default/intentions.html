@@ -21,18 +21,15 @@
 
       {{- $habits := slice -}}
       {{- $hidden := slice -}}
-      {{- range $year, $data := .Site.Data.habits -}}
-        {{- if isset $data "_hidden" -}}
-          {{- $hidden = $data._hidden -}}
+      {{- $latestYear := index $years (sub (len $years) 1) -}}
+      {{- $latestData := index .Site.Data.habits $latestYear -}}
+      {{- if isset $latestData "_hidden" -}}
+        {{- $hidden = $latestData._hidden -}}
+      {{- end -}}
+      {{- range $habit, $dates := $latestData -}}
+        {{- if and (ne $habit "_hidden") (not (in $hidden $habit)) -}}
+          {{- $habits = $habits | append $habit -}}
         {{- end -}}
-        {{- range $habit, $dates := $data -}}
-          {{- if and (ne $habit "_hidden") (not (in $hidden $habit)) -}}
-            {{- if not (in $habits $habit) -}}
-              {{- $habits = $habits | append $habit -}}
-            {{- end -}}
-          {{- end -}}
-        {{- end -}}
-        {{- break -}}
       {{- end -}}
       {{- $habits = sort $habits -}}
 

@@ -1,0 +1,10 @@
+name = "habit-tracker"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+GITHUB_REPO = "naimoon6450/moonblogs"
+GITHUB_BRANCH = "main"
+
+[observability]
+enabled = true

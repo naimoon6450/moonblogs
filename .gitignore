@@ -6,5 +6,6 @@ dist
 tmp
 
 telegram-bot/.env
-telegram-bot/
+telegram-bot/.claude
+telegram-bot/.wranger
 habit
