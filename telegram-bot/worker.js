@@ -18,29 +18,6 @@ export default {
     const rawText = text.trim();
     const lowerText = rawText.toLowerCase();
 
-    if (lowerText === 'help' || lowerText === 'h') {
-      return showHelp(env, reply);
-    }
-
-    if (lowerText === 'list' || lowerText === 'l') {
-      return listToday(env, reply);
-    }
-
-    if (lowerText.startsWith('/add ')) {
-      const habitName = rawText.slice(5).trim().toLowerCase().replace(/\s+/g, '-');
-      return addHabit(env, reply, habitName);
-    }
-
-    if (lowerText.startsWith('/delete ')) {
-      const habitName = rawText.slice(8).trim().toLowerCase().replace(/\s+/g, '-');
-      return deleteHabit(env, reply, habitName);
-    }
-
-    if (lowerText.startsWith('/restore ')) {
-      const habitName = rawText.slice(9).trim().toLowerCase().replace(/\s+/g, '-');
-      return restoreHabit(env, reply, habitName);
-    }
-
     const today = new Date().toISOString().slice(0, 10);
     const path = `data/habits/${today.slice(0, 4)}.yaml`;
     let file = await githubGet(env, path);
@@ -52,18 +29,37 @@ export default {
       data = parseYaml(file.content);
     }
 
+    if (lowerText === 'help' || lowerText === 'h') {
+      return showHelp(reply, data);
+    }
+
+    if (lowerText === 'list' || lowerText === 'l') {
+      return listToday(reply, data, today);
+    }
+
+    if (lowerText.startsWith('/add ')) {
+      const habitName = rawText.slice(5).trim().toLowerCase().replace(/\s+/g, '-');
+      return addHabit(env, reply, habitName, path, file, data);
+    }
+
+    if (lowerText.startsWith('/delete ')) {
+      const habitName = rawText.slice(8).trim().toLowerCase().replace(/\s+/g, '-');
+      return deleteHabit(env, reply, habitName, path, file, data);
+    }
+
+    if (lowerText.startsWith('/restore ')) {
+      const habitName = rawText.slice(9).trim().toLowerCase().replace(/\s+/g, '-');
+      return restoreHabit(env, reply, habitName, path, file, data);
+    }
+
     const shortcuts = data._shortcuts || {};
     const command = shortcuts[lowerText] || lowerText;
-    return trackHabit(env, reply, command, data, file);
+    return trackHabit(env, reply, command, data, file, path);
   },
 };
 
-async function trackHabit(env, reply, habit, preloadedData, preloadedFile) {
+async function trackHabit(env, reply, habit, data, file, path) {
   const today = new Date().toISOString().slice(0, 10);
-  const path = `data/habits/${today.slice(0, 4)}.yaml`;
-
-  const file = preloadedFile;
-  const data = preloadedData;
 
   if (!file) {
     return reply(`No habits file for ${today.slice(0, 4)}. Use /add ${habit} first.`);
@@ -85,15 +81,7 @@ async function trackHabit(env, reply, habit, preloadedData, preloadedFile) {
   return reply(`✓ ${habit}`);
 }
 
-async function listToday(env, reply) {
-  const today = new Date().toISOString().slice(0, 10);
-  const file = await githubGet(env, `data/habits/${today.slice(0, 4)}.yaml`);
-
-  if (file === null) {
-    return reply(`${today}\n\nNo habits yet. Use /add <habit> to create one.`);
-  }
-
-  const data = parseYaml(file.content);
+function listToday(reply, data, today) {
   const habits = getActiveHabits(data);
 
   if (habits.length === 0) {
@@ -104,10 +92,7 @@ async function listToday(env, reply) {
   return reply(`${today}\n\n${lines.join('\n')}`);
 }
 
-async function showHelp(env, reply) {
-  const today = new Date().toISOString().slice(0, 10);
-  const file = await githubGet(env, `data/habits/${today.slice(0, 4)}.yaml`);
-  const data = file ? parseYaml(file.content) : {};
+function showHelp(reply, data) {
   const habits = getActiveHabits(data);
   const shortcuts = data._shortcuts || {};
 
@@ -128,16 +113,10 @@ async function showHelp(env, reply) {
   return reply(`Commands:\n${cmds.join('\n')}`);
 }
 
-async function addHabit(env, reply, habit) {
+async function addHabit(env, reply, habit, path, file, data) {
   if (!habit || !/^[a-z][a-z0-9-]*$/.test(habit)) {
     return reply('Invalid habit name. Use lowercase letters, numbers, and hyphens.');
   }
-
-  const today = new Date().toISOString().slice(0, 10);
-  const path = `data/habits/${today.slice(0, 4)}.yaml`;
-  const file = await githubGet(env, path);
-
-  const data = file ? parseYaml(file.content) : {};
 
   if (data[habit] !== undefined && !data._hidden?.includes(habit)) {
     return reply(`Habit "${habit}" already exists.`);
@@ -179,16 +158,11 @@ function generateShortcut(habit, existingShortcuts) {
   return null;
 }
 
-async function deleteHabit(env, reply, habit) {
-  const today = new Date().toISOString().slice(0, 10);
-  const path = `data/habits/${today.slice(0, 4)}.yaml`;
-  const file = await githubGet(env, path);
-
+async function deleteHabit(env, reply, habit, path, file, data) {
   if (!file) {
     return reply('No habits file found.');
   }
 
-  const data = parseYaml(file.content);
   const habits = getActiveHabits(data);
 
   if (!habits.includes(habit)) {
@@ -200,16 +174,10 @@ async function deleteHabit(env, reply, habit) {
   return reply(`✓ Hidden "${habit}" (use /restore ${habit} to bring it back)`);
 }
 
-async function restoreHabit(env, reply, habit) {
-  const today = new Date().toISOString().slice(0, 10);
-  const path = `data/habits/${today.slice(0, 4)}.yaml`;
-  const file = await githubGet(env, path);
-
+async function restoreHabit(env, reply, habit, path, file, data) {
   if (!file) {
     return reply('No habits file found.');
   }
-
-  const data = parseYaml(file.content);
 
   if (!data._hidden?.includes(habit)) {
     return reply(`Habit "${habit}" is not hidden.`);
