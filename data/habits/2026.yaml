@@ -1,3 +1,11 @@
+_shortcuts:
+  e: "exercise"
+  j: "journaling"
+  m: "meditation"
+  r: "reading"
+  s: "morning-stretches"
+  w: "writing"
+
 exercise:
   - "2026-01-01"
   - "2026-01-03"
