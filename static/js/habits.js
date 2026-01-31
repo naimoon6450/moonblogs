@@ -309,11 +309,10 @@
     const yearData = habitsData[year] || {};
 
     renderRollupGraph(year);
-    renderGraph('meditation-graph', yearData.meditation, year);
-    renderGraph('journaling-graph', yearData.journaling, year);
-    renderGraph('writing-graph', yearData.writing, year);
-    renderGraph('exercise-graph', yearData.exercise, year);
-    renderGraph('reading-graph', yearData.reading, year);
+
+    Object.keys(yearData).forEach(habit => {
+      renderGraph(`${habit}-graph`, yearData[habit], year);
+    });
   }
 
   function init() {

@@ -19,43 +19,35 @@
         {{- end }}
       </div>
 
-      {{- $habitCount := 0 -}}
+      {{- $habits := slice -}}
+      {{- $hidden := slice -}}
       {{- range $year, $data := .Site.Data.habits -}}
+        {{- if isset $data "_hidden" -}}
+          {{- $hidden = $data._hidden -}}
+        {{- end -}}
         {{- range $habit, $dates := $data -}}
-          {{- $habitCount = add $habitCount 1 -}}
+          {{- if and (ne $habit "_hidden") (not (in $hidden $habit)) -}}
+            {{- if not (in $habits $habit) -}}
+              {{- $habits = $habits | append $habit -}}
+            {{- end -}}
+          {{- end -}}
         {{- end -}}
         {{- break -}}
       {{- end -}}
+      {{- $habits = sort $habits -}}
+
       <section class="habit-section" id="rollup-section">
         <h2>All Habits</h2>
-        <p class="habit-subtitle">Combined activity across {{ $habitCount }} habits</p>
+        <p class="habit-subtitle">Combined activity across {{ len $habits }} habits</p>
         <div class="contribution-graph" id="rollup-graph"></div>
       </section>
 
+      {{- range $habits }}
       <section class="habit-section">
-        <h2>Meditation</h2>
-        <div class="contribution-graph" id="meditation-graph"></div>
+        <h2>{{ . | replaceRE "-" " " | title }}</h2>
+        <div class="contribution-graph" id="{{ . }}-graph"></div>
       </section>
-
-      <section class="habit-section">
-        <h2>Journaling</h2>
-        <div class="contribution-graph" id="journaling-graph"></div>
-      </section>
-
-      <section class="habit-section">
-        <h2>Writing</h2>
-        <div class="contribution-graph" id="writing-graph"></div>
-      </section>
-
-      <section class="habit-section">
-        <h2>Exercise</h2>
-        <div class="contribution-graph" id="exercise-graph"></div>
-      </section>
-
-      <section class="habit-section">
-        <h2>Reading</h2>
-        <div class="contribution-graph" id="reading-graph"></div>
-      </section>
+      {{- end }}
     </div>
 
     <div class="tooltip" id="tooltip"></div>
@@ -63,12 +55,16 @@
     <script>
       const habitsData = {
         {{- range $year, $data := .Site.Data.habits }}
+        {{- $hidden := slice -}}
+        {{- if isset $data "_hidden" }}{{ $hidden = $data._hidden }}{{ end }}
         "{{ $year }}": {
-          meditation: [{{ range $i, $d := $data.meditation }}{{ if $i }},{{ end }}"{{ $d }}"{{ end }}],
-          journaling: [{{ range $i, $d := $data.journaling }}{{ if $i }},{{ end }}"{{ $d }}"{{ end }}],
-          writing: [{{ range $i, $d := $data.writing }}{{ if $i }},{{ end }}"{{ $d }}"{{ end }}],
-          exercise: [{{ range $i, $d := $data.exercise }}{{ if $i }},{{ end }}"{{ $d }}"{{ end }}],
-          reading: [{{ range $i, $d := $data.reading }}{{ if $i }},{{ end }}"{{ $d }}"{{ end }}]
+          {{- $first := true -}}
+          {{- range $habit, $dates := $data -}}
+            {{- if and (ne $habit "_hidden") (not (in $hidden $habit)) -}}
+              {{- if not $first }},{{ end }}{{ $first = false }}
+          "{{ $habit }}": [{{ range $i, $d := $dates }}{{ if $i }},{{ end }}"{{ $d }}"{{ end }}]
+            {{- end -}}
+          {{- end }}
         },
         {{- end }}
       };
