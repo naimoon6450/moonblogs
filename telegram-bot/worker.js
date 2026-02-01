@@ -20,31 +20,27 @@ export default {
 
     const today = new Date().toISOString().slice(0, 10);
     const path = `data/habits/${today.slice(0, 4)}.yaml`;
-    let file = await githubGet(env, path);
-    let data = file ? parseYaml(file.content) : {};
-
-    if (migrateShortcuts(data) && file) {
-      await githubPut(env, path, serializeYaml(data), file.sha, 'Migrate shortcuts');
-      file = await githubGet(env, path);
-      data = parseYaml(file.content);
-    }
+    const file = await githubGet(env, path);
+    const data = file ? parseYaml(file.content) : {};
+    const habits = getActiveHabits(data);
+    const shortcuts = buildShortcuts(habits);
 
     if (lowerText === 'help' || lowerText === 'h') {
-      return showHelp(reply, data);
+      return showHelp(reply, habits, shortcuts);
     }
 
     if (lowerText === 'list' || lowerText === 'l') {
-      return listToday(reply, data, today);
+      return listToday(reply, data, habits, today);
     }
 
     if (lowerText.startsWith('/add ')) {
       const habitName = rawText.slice(5).trim().toLowerCase().replace(/\s+/g, '-');
-      return addHabit(env, reply, habitName, path, file, data);
+      return addHabit(env, reply, habitName, path, file, data, habits);
     }
 
     if (lowerText.startsWith('/delete ')) {
       const habitName = rawText.slice(8).trim().toLowerCase().replace(/\s+/g, '-');
-      return deleteHabit(env, reply, habitName, path, file, data);
+      return deleteHabit(env, reply, habitName, path, file, data, habits);
     }
 
     if (lowerText.startsWith('/restore ')) {
@@ -52,20 +48,17 @@ export default {
       return restoreHabit(env, reply, habitName, path, file, data);
     }
 
-    const shortcuts = data._shortcuts || {};
     const command = shortcuts[lowerText] || lowerText;
-    return trackHabit(env, reply, command, data, file, path);
+    return trackHabit(env, reply, command, data, habits, file, path);
   },
 };
 
-async function trackHabit(env, reply, habit, data, file, path) {
+async function trackHabit(env, reply, habit, data, habits, file, path) {
   const today = new Date().toISOString().slice(0, 10);
 
   if (!file) {
     return reply(`No habits file for ${today.slice(0, 4)}. Use /add ${habit} first.`);
   }
-
-  const habits = getActiveHabits(data);
 
   if (!habits.includes(habit)) {
     return reply(`Unknown habit: "${habit}". Use /add ${habit} to create it.`);
@@ -81,9 +74,7 @@ async function trackHabit(env, reply, habit, data, file, path) {
   return reply(`✓ ${habit}`);
 }
 
-function listToday(reply, data, today) {
-  const habits = getActiveHabits(data);
-
+function listToday(reply, data, habits, today) {
   if (habits.length === 0) {
     return reply(`${today}\n\nNo habits yet. Use /add <habit> to create one.`);
   }
@@ -92,12 +83,13 @@ function listToday(reply, data, today) {
   return reply(`${today}\n\n${lines.join('\n')}`);
 }
 
-function showHelp(reply, data) {
-  const habits = getActiveHabits(data);
-  const shortcuts = data._shortcuts || {};
+function showHelp(reply, habits, shortcuts) {
+  const shortcutByHabit = Object.fromEntries(
+    Object.entries(shortcuts).map(([k, v]) => [v, k])
+  );
 
   const habitCmds = habits.map((h) => {
-    const shortcut = Object.entries(shortcuts).find(([, v]) => v === h)?.[0];
+    const shortcut = shortcutByHabit[h];
     return shortcut ? `${h} (${shortcut})` : h;
   }).join('\n');
 
@@ -113,7 +105,7 @@ function showHelp(reply, data) {
   return reply(`Commands:\n${cmds.join('\n')}`);
 }
 
-async function addHabit(env, reply, habit, path, file, data) {
+async function addHabit(env, reply, habit, path, file, data, habits) {
   if (!habit || !/^[a-z][a-z0-9-]*$/.test(habit)) {
     return reply('Invalid habit name. Use lowercase letters, numbers, and hyphens.');
   }
@@ -125,45 +117,24 @@ async function addHabit(env, reply, habit, path, file, data) {
   if (data._hidden?.includes(habit)) {
     data._hidden = data._hidden.filter((h) => h !== habit);
     await githubPut(env, path, serializeYaml(data), file?.sha, `Restore habit ${habit}`);
-    const shortcut = Object.entries(data._shortcuts || {}).find(([, v]) => v === habit)?.[0];
+    const newHabits = [...habits, habit].sort();
+    const shortcuts = buildShortcuts(newHabits);
+    const shortcut = Object.entries(shortcuts).find(([, v]) => v === habit)?.[0];
     return reply(`✓ Restored "${habit}"${shortcut ? ` (${shortcut})` : ''}`);
   }
 
   data[habit] = [];
-  const shortcut = generateShortcut(habit, data._shortcuts || {});
-  if (shortcut) {
-    data._shortcuts = { ...(data._shortcuts || {}), [shortcut]: habit };
-  }
   await githubPut(env, path, serializeYaml(data), file?.sha, `Add habit ${habit}`);
+  const newHabits = [...habits, habit].sort();
+  const shortcuts = buildShortcuts(newHabits);
+  const shortcut = Object.entries(shortcuts).find(([, v]) => v === habit)?.[0];
   return reply(`✓ Added "${habit}"${shortcut ? ` (${shortcut})` : ''}`);
 }
 
-function generateShortcut(habit, existingShortcuts) {
-  const usedKeys = new Set(Object.keys(existingShortcuts));
-  const parts = habit.split('-');
-  const firstLetter = parts[0][0];
-  if (!usedKeys.has(firstLetter)) {
-    return firstLetter;
-  }
-  for (const part of parts) {
-    if (!usedKeys.has(part[0])) {
-      return part[0];
-    }
-  }
-  for (const char of habit.replace(/-/g, '')) {
-    if (!usedKeys.has(char)) {
-      return char;
-    }
-  }
-  return null;
-}
-
-async function deleteHabit(env, reply, habit, path, file, data) {
+async function deleteHabit(env, reply, habit, path, file, data, habits) {
   if (!file) {
     return reply('No habits file found.');
   }
-
-  const habits = getActiveHabits(data);
 
   if (!habits.includes(habit)) {
     return reply(`Habit "${habit}" not found.`);
@@ -185,7 +156,43 @@ async function restoreHabit(env, reply, habit, path, file, data) {
 
   data._hidden = data._hidden.filter((h) => h !== habit);
   await githubPut(env, path, serializeYaml(data), file.sha, `Restore habit ${habit}`);
-  return reply(`✓ Restored "${habit}"`);
+  const newHabits = getActiveHabits(data);
+  const shortcuts = buildShortcuts(newHabits);
+  const shortcut = Object.entries(shortcuts).find(([, v]) => v === habit)?.[0];
+  return reply(`✓ Restored "${habit}"${shortcut ? ` (${shortcut})` : ''}`);
+}
+
+// --- Shortcuts ---
+
+function buildShortcuts(habits) {
+  const shortcuts = {};
+  for (const habit of habits) {
+    const shortcut = generateShortcut(habit, shortcuts);
+    if (shortcut) {
+      shortcuts[shortcut] = habit;
+    }
+  }
+  return shortcuts;
+}
+
+function generateShortcut(habit, existingShortcuts) {
+  const usedKeys = new Set(Object.keys(existingShortcuts));
+  const parts = habit.split('-');
+  const firstLetter = parts[0][0];
+  if (!usedKeys.has(firstLetter)) {
+    return firstLetter;
+  }
+  for (const part of parts) {
+    if (!usedKeys.has(part[0])) {
+      return part[0];
+    }
+  }
+  for (const char of habit.replace(/-/g, '')) {
+    if (!usedKeys.has(char)) {
+      return char;
+    }
+  }
+  return null;
 }
 
 // --- GitHub API ---
@@ -244,16 +251,7 @@ function parseYaml(content) {
     const key = line.match(/^([a-z_][a-z0-9_-]*):$/)?.[1];
     if (key) {
       current = key;
-      if (current === '_shortcuts') {
-        data[current] = {};
-      } else {
-        data[current] = [];
-      }
-    } else if (current === '_shortcuts') {
-      const match = line.match(/^\s+([a-z]):\s+"?([a-z][a-z0-9-]*)"?$/);
-      if (match) {
-        data[current][match[1]] = match[2];
-      }
+      data[current] = [];
     } else {
       const date = line.match(/^\s+-\s+"?(\d{4}-\d{2}-\d{2})"?$/)?.[1];
       const str = line.match(/^\s+-\s+"?([a-z][a-z0-9-]*)"?$/)?.[1];
@@ -270,7 +268,6 @@ function parseYaml(content) {
 function serializeYaml(data) {
   const lines = [];
   const hidden = data._hidden || [];
-  const shortcuts = data._shortcuts || {};
 
   if (hidden.length > 0) {
     lines.push('_hidden:');
@@ -278,15 +275,7 @@ function serializeYaml(data) {
     lines.push('');
   }
 
-  if (Object.keys(shortcuts).length > 0) {
-    lines.push('_shortcuts:');
-    Object.entries(shortcuts).sort(([a], [b]) => a.localeCompare(b)).forEach(([k, v]) => {
-      lines.push(`  ${k}: "${v}"`);
-    });
-    lines.push('');
-  }
-
-  const habits = Object.keys(data).filter((k) => k !== '_hidden' && k !== '_shortcuts').sort();
+  const habits = Object.keys(data).filter((k) => k !== '_hidden').sort();
   for (const habit of habits) {
     lines.push(`${habit}:`);
     const dates = data[habit] || [];
@@ -299,27 +288,5 @@ function serializeYaml(data) {
 
 function getActiveHabits(data) {
   const hidden = new Set(data._hidden || []);
-  return Object.keys(data).filter((k) => k !== '_hidden' && k !== '_shortcuts' && !hidden.has(k)).sort();
-}
-
-function migrateShortcuts(data) {
-  const habits = getActiveHabits(data);
-  const shortcuts = data._shortcuts || {};
-  const habitsWithShortcuts = new Set(Object.values(shortcuts));
-  let changed = false;
-
-  for (const habit of habits) {
-    if (!habitsWithShortcuts.has(habit)) {
-      const shortcut = generateShortcut(habit, shortcuts);
-      if (shortcut) {
-        shortcuts[shortcut] = habit;
-        changed = true;
-      }
-    }
-  }
-
-  if (changed) {
-    data._shortcuts = shortcuts;
-  }
-  return changed;
+  return Object.keys(data).filter((k) => k !== '_hidden' && !hidden.has(k)).sort();
 }
