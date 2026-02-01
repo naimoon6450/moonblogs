@@ -1,6 +1,6 @@
 # Telegram Bot → GitHub Habit Tracking Integration
 
-Message a Telegram bot → updates YAML in GitHub → site rebuilds with updated chart.
+Overengineered habit tracking. Message a Telegram bot → updates YAML in GitHub → site rebuilds with updated chart.
 
 ## Architecture
 
