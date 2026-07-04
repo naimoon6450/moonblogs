@@ -1,20 +1,20 @@
-<div class="image-grid">
+<div style="display:flex; gap:1rem; margin:1.5rem 0;">
   {{ if .Get "src1" }}
-  <figure class="image-grid-item">
-    <img src="{{ .Get "src1" }}" alt="{{ .Get "cap1" }}">
-    <figcaption>{{ .Get "cap1" }}</figcaption>
+  <figure style="flex:1; margin:0; display:flex; flex-direction:column;">
+    <img src="{{ .Get "src1" }}" alt="{{ .Get "cap1" }}" style="width:100%; height:220px; object-fit:cover; border-radius:4px; margin:0;">
+    <figcaption style="margin-top:0.5rem; font-size:0.85rem; color:#888; text-align:center; font-style:italic;">{{ .Get "cap1" }}</figcaption>
   </figure>
   {{ end }}
   {{ if .Get "src2" }}
-  <figure class="image-grid-item">
-    <img src="{{ .Get "src2" }}" alt="{{ .Get "cap2" }}">
-    <figcaption>{{ .Get "cap2" }}</figcaption>
+  <figure style="flex:1; margin:0; display:flex; flex-direction:column;">
+    <img src="{{ .Get "src2" }}" alt="{{ .Get "cap2" }}" style="width:100%; height:220px; object-fit:cover; border-radius:4px; margin:0;">
+    <figcaption style="margin-top:0.5rem; font-size:0.85rem; color:#888; text-align:center; font-style:italic;">{{ .Get "cap2" }}</figcaption>
   </figure>
   {{ end }}
   {{ if .Get "src3" }}
-  <figure class="image-grid-item">
-    <img src="{{ .Get "src3" }}" alt="{{ .Get "cap3" }}">
-    <figcaption>{{ .Get "cap3" }}</figcaption>
+  <figure style="flex:1; margin:0; display:flex; flex-direction:column;">
+    <img src="{{ .Get "src3" }}" alt="{{ .Get "cap3" }}" style="width:100%; height:220px; object-fit:cover; border-radius:4px; margin:0;">
+    <figcaption style="margin-top:0.5rem; font-size:0.85rem; color:#888; text-align:center; font-style:italic;">{{ .Get "cap3" }}</figcaption>
   </figure>
   {{ end }}
 </div>
