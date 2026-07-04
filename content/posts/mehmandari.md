@@ -17,7 +17,7 @@ The word can be broken into two parts:
 
 So it quite literally means something like "guest-keeping" or "the practice of guest holding". 
 
-An interesting fact I recently learned is that Chittagongions (the district of Bangladesh where my family is from) have a tradition called "Mezban", which is a large communal feast and part of the larger cultural emphasis on generous, almost performative hosting: elaborate food, insistence on guests eating more than they want, and refusal to let a guest leave empty-handed. 
+Chittagongions (the district of Bangladesh where my family is from) have a tradition called "Mezban", which is a large communal feast and part of the larger cultural emphasis on generous, almost performative hosting: elaborate food, insistence on guests eating more than they want, and refusal to let a guest leave empty-handed. 
 
 Mehmandari is a word, among many, that was absorbed over centuries of Muslim rule, Sufi presence, and trade contact in Bengal, especially from the Sultanate and Mughal periods. Mehmandari was absolutely core to my upbringing and something I would watch my parents practice religiously. It was part of our identity and while it definitely can get performative, it leaves the guests and hosts feeling a stronger bond and kinship. I've seen it practiced with family and even with strangers. From the electrician who tirelessly worked to fix our AC to the Uber driver who held on to my phone and drove back from the city to return it, we would not let them leave empty handed. The more I sit with it, it seems like a nice way of thinking about how to love someone well, friend or otherwise.
 
