@@ -1,7 +1,7 @@
 +++
 title = 'Mehmandari'
 date = 2026-07-03T00:00:00-04:00
-draft = true
+draft = false
 type = "thought"
 +++
 
