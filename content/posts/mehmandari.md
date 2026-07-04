@@ -23,4 +23,16 @@ Mehmandari is a word, among many, that was absorbed over centuries of Muslim rul
 
 So if Mehmandari is a blueprint for making someone feel loved, guest or friend, what does that actually look like in practice? Obviously there's the hospitality elements, but I think it's more about amplifying selflessness. To think about the well being of others before you cater to yourself. To feel the joy of the guest and continue to amplify their joy. To keep an eye out on who may need something, but is too shy to ask for it. To not ask "if" they want something, but to give it anyway. Maybe they refuse or maybe you give them what they wanted all along, but they were a bit shy or embarrassed to ask for it. It's about finding the shy person in the corner and striking a conversation with them so they feel seen. It's about listening to what's new in their lives and following up with a question or two before wanting to talk about yourself. It's about going out of your way to help even if it means being inconvenienced. Part of the spirit of Mehmandari is to see the presence of the guest as a "gift sent from god". 
 
-I've seen elements of this spirit in a few friends this past year, which I truly appreciated. A friend hosting elaborate and absolutely delicious dinners. Another gifting people their favorite book on their birthday death cafe experience. Another opening up their oasis of a home so we could throw a coffee popup. Another who went to pickup an AC wire only to find out someone else already picked it up. Just to name a few. Mehmandari doesn't happen naturally, it has to be practiced. I still don't think there's one answer to what makes a friendship strong, but Mehmandari feels like a good place to start.
+I've seen elements of this spirit in a few friends this past year, which I truly appreciated.
+
+![An elaborate feast spread](/images/feastwithfriend.jpg)
+
+A friend hosting elaborate and absolutely delicious dinners.
+
+![Being Mortal by Atul Gawande](/images/beingmortal.jpg)
+
+Another gifting people their favorite book on their birthday death cafe experience.
+
+![An oasis of a home](/images/space.jpg)
+
+Another opening up their oasis of a home so we could throw a coffee popup. Another who went to pickup an AC wire only to find out someone else already picked it up. Just to name a few. Mehmandari doesn't happen naturally, it has to be practiced. I still don't think there's one answer to what makes a friendship strong, but Mehmandari feels like a good place to start.
