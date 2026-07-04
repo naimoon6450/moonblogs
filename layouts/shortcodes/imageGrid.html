@@ -1,0 +1,20 @@
+<div class="image-grid">
+  {{ if .Get "src1" }}
+  <figure class="image-grid-item">
+    <img src="{{ .Get "src1" }}" alt="{{ .Get "cap1" }}">
+    <figcaption>{{ .Get "cap1" }}</figcaption>
+  </figure>
+  {{ end }}
+  {{ if .Get "src2" }}
+  <figure class="image-grid-item">
+    <img src="{{ .Get "src2" }}" alt="{{ .Get "cap2" }}">
+    <figcaption>{{ .Get "cap2" }}</figcaption>
+  </figure>
+  {{ end }}
+  {{ if .Get "src3" }}
+  <figure class="image-grid-item">
+    <img src="{{ .Get "src3" }}" alt="{{ .Get "cap3" }}">
+    <figcaption>{{ .Get "cap3" }}</figcaption>
+  </figure>
+  {{ end }}
+</div>
