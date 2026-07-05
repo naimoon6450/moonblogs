@@ -26,7 +26,7 @@ So if Mehmandari is a blueprint for making someone feel loved, guest or friend, 
 I've seen elements of this spirit in a few friends this past year, which I truly appreciated.
 
 {{< imageGrid
-  src1="/images/feastwithfriend.jpg" cap1="A couple hosting absolutely delicious feasts for fun."
+  src1="/images/feastwithfriend.jpg" cap1="A couple sharing their love through delicious feasts."
   src2="/images/beingmortal.jpg" cap2="Another gifting people their favorite book on their birthday death cafe experience."
   src3="/images/space.jpg" cap3="Another opening up their oasis of a home so we could throw a coffee popup."
 >}} Another who went to pickup an AC-wire only to find out someone else already picked it up. Just to name a few. I dont think Mehmandari happens naturally, but something that has to be practiced. I still don't think there's one answer to what makes a friendship strong, but Mehmandari feels like a nice place to start.
